@@ -16,6 +16,7 @@ public class User implements Parcelable {
     public User(){
     }
 
+
     protected User(Parcel in) {
         id = in.readLong();
         name = in.readString();
@@ -34,6 +35,30 @@ public class User implements Parcelable {
         }
     };
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -45,16 +70,4 @@ public class User implements Parcelable {
         dest.writeString(name);
         dest.writeString(password);
     }
-
-    public long getId() { return id; }
-
-    public void setId(long id) { this.id = id; }
-
-    public String getName() { return name; }
-
-    public void setName(String name) { this.name = name; }
-
-    public String getPassword() { return password; }
-
-    public void setPassword(String password) { this.password = password; }
 }
