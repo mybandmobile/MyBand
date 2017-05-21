@@ -12,7 +12,6 @@ public class User implements Parcelable {
     private long id;
     private String name;
     private String password;
-    private String location;
 
     public User(){
     }
@@ -21,7 +20,6 @@ public class User implements Parcelable {
         id = in.readLong();
         name = in.readString();
         password = in.readString();
-        location = in.readString();
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -46,7 +44,6 @@ public class User implements Parcelable {
         dest.writeLong(id);
         dest.writeString(name);
         dest.writeString(password);
-        dest.writeString(location);
     }
 
     public long getId() { return id; }
@@ -60,8 +57,4 @@ public class User implements Parcelable {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
-
-    public String getLocation() { return location; }
-
-    public void setLocation(String location) { this.location = location; }
 }
