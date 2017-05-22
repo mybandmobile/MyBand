@@ -20,7 +20,7 @@ public class UserDAO {
     private Context mContext;
     private User user;
 
-    public UserDAO(Context mContext) { this.mContext = mContext; }
+    public UserDAO(Context mContext) {this.mContext = mContext;}
 
     public User insertUser(User user){
         MyBandHelper helper = new MyBandHelper(mContext);
