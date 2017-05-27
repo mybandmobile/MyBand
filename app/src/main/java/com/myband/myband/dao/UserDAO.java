@@ -20,9 +20,11 @@ public class UserDAO {
     private Context mContext;
     private User user;
 
-    public UserDAO(Context mContext) {this.mContext = mContext;}
+    public UserDAO(Context mContext) {
+        this.mContext = mContext;
+    }
 
-    public User insertUser(User user){
+    public User insertUser(User user) {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -34,7 +36,7 @@ public class UserDAO {
         return user;
     }
 
-    public int updateUser(User user){
+    public int updateUser(User user) {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getWritableDatabase();
 
@@ -45,17 +47,15 @@ public class UserDAO {
         return rowsAffected;
     }
 
-    public int deleteUser(User user){
+    public int deleteUser(User user) {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getWritableDatabase();
-
         int rowsAffected = db.delete(UserContract.TABLE_NAME, UserContract._ID + " = ?", new String[]{String.valueOf(user.getId())});
-
         db.close();
         return rowsAffected;
     }
 
-    public List<User> listUser(){
+    public List<User> listUser() {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getReadableDatabase();
 
@@ -63,13 +63,12 @@ public class UserDAO {
 
         List<User> list = new ArrayList<>();
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             user = new User();
 
             user.setId(cursor.getLong(cursor.getColumnIndex(UserContract._ID)));
-            user.setName(cursor.getString(cursor.getColumnIndex(UserContract.NAME)));
             user.setPassword(cursor.getString(cursor.getColumnIndex(UserContract.PASSWORD)));
-            user.setLocation(cursor.getString(cursor.getColumnIndex(UserContract.LOCATION)));
+
 
             list.add(user);
         }
@@ -82,9 +81,10 @@ public class UserDAO {
     private ContentValues valuesFromUser(User user) {
         ContentValues values = new ContentValues();
         values.put(UserContract._ID, user.getId());
-        values.put(UserContract.NAME, user.getName());
+
         values.put(UserContract.PASSWORD, user.getPassword());
-        values.put(UserContract.LOCATION, user.getLocation());
+
         return values;
     }
 }
+
