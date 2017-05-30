@@ -21,6 +21,8 @@ public class UserAvailability {
     public final static int sabado = 6;
     public final static int domingo = 7;
 
+    public UserAvailability() {
+    }
 
     public Long getId() {
         return id;

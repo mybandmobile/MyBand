@@ -7,21 +7,48 @@ import org.parceler.Parcel;
  */
 
 @Parcel
-public class User  {
+public class User {
 
     private Long id;
+    private Category category;
     private String userName;
+    private String login;
     private String password;
+    private String location;
 
-    public User(){
+    public User() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -32,11 +59,11 @@ public class User  {
         this.password = password;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getLocation() {
+        return location;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

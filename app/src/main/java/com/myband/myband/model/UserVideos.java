@@ -13,6 +13,8 @@ public class UserVideos {
     private User idUser;
     private String link;
 
+    public UserVideos() {
+    }
 
     public long getId() {
         return id;

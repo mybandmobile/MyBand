@@ -10,10 +10,13 @@ import org.parceler.Parcel;
 public class Rating {
 
     private Long id;
-    private Service idService;
-    private Boolean requester;
+    private Event event;
+    private boolean requester;
     private int rating;
     private String comment;
+
+    public Rating() {
+    }
 
     public Long getId() {
         return id;
@@ -23,19 +26,19 @@ public class Rating {
         this.id = id;
     }
 
-    public Service getIdService() {
-        return idService;
+    public Event getEvent() {
+        return event;
     }
 
-    public void setIdService(Service idService) {
-        this.idService = idService;
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
-    public Boolean getRequester() {
+    public boolean isRequester() {
         return requester;
     }
 
-    public void setRequester(Boolean requester) {
+    public void setRequester(boolean requester) {
         this.requester = requester;
     }
 
