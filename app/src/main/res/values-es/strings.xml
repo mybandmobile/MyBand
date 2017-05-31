@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MyBand</string>
+    <string name="name">Nombre</string>
+    <string name="login">Login</string>
+    <string name="password">Contraseña</string>
+    <string name="password2">Repita la contraseña</string>
+    <string name="category">Categoría</string>
+    <string name="typeArtist">Artista</string>
+    <string name="typeBand">Banda</string>
+    <string name="typePromoter">Promotor</string>
+    <string name="signin">Iniciar sesión</string>
+    <string name="signup">Regístrate</string>
+
+    <string name="invalidpassword">Usuario o contraseña no coinciden!</string>
+    <string name="errorlogin">Error de conexión!</string>
+    <string name="invalidinputs">Campos no válidos!</string>
+</resources>

@@ -2,11 +2,13 @@ package com.myband.myband.model;
 
 import org.parceler.Parcel;
 
+import static org.parceler.Parcel.Serialization.BEAN;
+
 /**
  * Created by Escritorio on 22/05/2017.
  */
 
-@Parcel
+@Parcel(BEAN)
 public class UserVideos {
 
     private long id;

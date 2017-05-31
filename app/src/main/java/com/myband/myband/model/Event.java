@@ -4,11 +4,13 @@ import org.parceler.Parcel;
 
 import java.util.Date;
 
+import static org.parceler.Parcel.Serialization.BEAN;
+
 /**
  * Created by Escritorio on 22/05/2017.
  */
 
-@Parcel
+@Parcel(BEAN)
 public class Event {
 
     private Long id;

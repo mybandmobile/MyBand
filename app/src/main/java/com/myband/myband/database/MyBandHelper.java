@@ -14,18 +14,23 @@ public class MyBandHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
     public static final String DB_NAME = "myBand";
 
-    public MyBandHelper(Context context) { super(context, DB_NAME, null, DB_VERSION); }
+    public MyBandHelper(Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createUser = "CREATE TABLE " + UserContract.TABLE_NAME + " (" +
-                UserContract._ID + " INTEGER PRIMARY KEY, " +
-                UserContract.NAME + " TEXT NOT NULL, " +
-                UserContract.PASSWORD + " TEXT NOT NULL, " +
-                UserContract.LOCATION + " TEXT NOT NULL);";
+        String createTableUser = "CREATE TABLE " + UserContract.TABLE_NAME + " (" +
+                UserContract.COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                UserContract.COLUMN_NAME + " TEXT NOT NULL, " +
+                UserContract.COLUMN_PASSWORD + " TEXT NOT NULL, " +
+                UserContract.COLUMN_LOGIN + " TEXT NOT NULL, " +
+                UserContract.COLUMN_CATEGORY + " INTEGER NOT NULL, " +
+                UserContract.COLUMN_LOCATION + " TEXT, " +
+                UserContract.COLUMN_AUTOLOGIN + " INTEGER NOT NULL);";
 
-        db.execSQL(createUser);
+        db.execSQL(createTableUser);
     }
 
     @Override

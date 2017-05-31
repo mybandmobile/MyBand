@@ -2,11 +2,13 @@ package com.myband.myband.model;
 
 import org.parceler.Parcel;
 
+import static org.parceler.Parcel.Serialization.BEAN;
+
 /**
  * Created by Ranieri Aguiar on 11 de mai.
  */
 
-@Parcel
+@Parcel(BEAN)
 public class User {
 
     private Long id;
@@ -15,6 +17,7 @@ public class User {
     private String login;
     private String password;
     private String location;
+    private boolean autoLogin;
 
     public User() {
     }
@@ -65,5 +68,13 @@ public class User {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public boolean isAutoLogin() {
+        return autoLogin;
+    }
+
+    public void setAutoLogin(boolean autoLogin) {
+        this.autoLogin = autoLogin;
     }
 }

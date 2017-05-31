@@ -2,11 +2,13 @@ package com.myband.myband.model;
 
 import org.parceler.Parcel;
 
+import static org.parceler.Parcel.Serialization.BEAN;
+
 /**
  * Created by ranie on 30 de mai.
  */
 
-@Parcel
+@Parcel(BEAN)
 public class Genre {
 
     private Long id;

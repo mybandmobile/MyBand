@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">MyBand</string>
-    <string name="app_name_fantasia">iMyBand</string>
+    <string name="name">Name</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="password2">Repeat the password</string>
+    <string name="category">Category</string>
+    <string name="typeArtist">Artist</string>
+    <string name="typeBand">Band</string>
+    <string name="typePromoter">Promoter</string>
+    <string name="signin">Sign in</string>
+    <string name="signup">Sign up</string>
+
+    <string name="invalidpassword">User or password does not match!</string>
+    <string name="errorlogin">Connection error!</string>
+    <string name="invalidinputs">Invalid inputs!</string>
 </resources>
