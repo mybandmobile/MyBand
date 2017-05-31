@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btnSignIn, R.id.btnSignUp})
+    @OnClick({R.id.btnSignIn, R.id.btnSignUp, R.id.btnMaps})
     void onItemClicked(View view) {
         Intent it;
         User user;
@@ -80,6 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                 break;
             case R.id.btnSignUp:
                 it = new Intent(this, CreateUserActivity.class);
+                startActivity(it);
+                break;
+            case R.id.btnMaps:
+                it = new Intent(this, MapsActivity.class);
                 startActivity(it);
                 break;
         }

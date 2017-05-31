@@ -14,4 +14,6 @@
     <string name="invalidpassword">User or password does not match!</string>
     <string name="errorlogin">Connection error!</string>
     <string name="invalidinputs">Invalid inputs!</string>
+
+    <string name="title_activity_maps">Map</string>
 </resources>

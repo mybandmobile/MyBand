@@ -14,4 +14,6 @@
     <string name="invalidpassword">Usuário ou senha não coincidem!</string>
     <string name="errorlogin">Erro de conexão!</string>
     <string name="invalidinputs">Campos inválidos!</string>
+
+    <string name="title_activity_maps">Mapa</string>
 </resources>
