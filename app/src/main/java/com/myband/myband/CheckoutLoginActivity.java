@@ -25,6 +25,7 @@ public class CheckoutLoginActivity extends AppCompatActivity {
         if (user == null) {
             it = new Intent(this, LoginActivity.class);
             startActivity(it);
+            finish();
         } else {
             //verifica internet
             try {
@@ -46,6 +47,7 @@ public class CheckoutLoginActivity extends AppCompatActivity {
                 it.putExtra("user", Parcels.wrap(user));
             } finally {
                 startActivity(it);
+                finish();
             }
         }
     }

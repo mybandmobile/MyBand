@@ -76,10 +76,16 @@ public class CreateUserActivity extends AppCompatActivity {
                     if (user == null) {
                         Toast.makeText(this, getResources().getString(R.string.errorlogin), Toast.LENGTH_LONG).show();
                     } else {
-                        dao.insert(user);
-                        it = new Intent(this, MainActivity.class);
-                        it.putExtra("user", Parcels.wrap(user));
-                        startActivity(it);
+                        if (user.getStatusCode() == 1) {
+                            dao.insert(user);
+                            it = new Intent(this, MainActivity.class);
+                            it.putExtra("user", Parcels.wrap(user));
+                            startActivity(it);
+                            finish();
+                        } else {
+                            // tratar esse erro!
+                            Toast.makeText(this, getResources().getString(R.string.invalidinputs), Toast.LENGTH_LONG).show();
+                        }
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

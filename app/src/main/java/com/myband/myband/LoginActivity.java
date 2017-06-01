@@ -59,13 +59,16 @@ public class LoginActivity extends AppCompatActivity {
                         user = new LoginTask().execute(user).get();
                         if (user == null) {
                             Toast.makeText(this, getResources().getString(R.string.errorlogin), Toast.LENGTH_LONG).show();
-                        } else if (user.isAutoLogin()) {
-                            dao.update(user);
-                            it = new Intent(this, MainActivity.class);
-                            it.putExtra("user", Parcels.wrap(user));
-                            startActivity(it);
                         } else {
-                            Toast.makeText(this, getResources().getString(R.string.invalidpassword), Toast.LENGTH_LONG).show();
+                            if (user.getStatusCode() == 1) {
+                                dao.update(user);
+                                it = new Intent(this, MainActivity.class);
+                                it.putExtra("user", Parcels.wrap(user));
+                                startActivity(it);
+                                finish();
+                            } else {
+                                Toast.makeText(this, getResources().getString(R.string.invalidpassword), Toast.LENGTH_LONG).show();
+                            }
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();

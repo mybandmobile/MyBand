@@ -17,6 +17,7 @@ public class User {
     private String login;
     private String password;
     private String location;
+    private int statusCode;
     private boolean autoLogin;
 
     public User() {
@@ -76,5 +77,13 @@ public class User {
 
     public void setAutoLogin(boolean autoLogin) {
         this.autoLogin = autoLogin;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void setStatusCode(int statusCode) {
+        this.statusCode = statusCode;
     }
 }
