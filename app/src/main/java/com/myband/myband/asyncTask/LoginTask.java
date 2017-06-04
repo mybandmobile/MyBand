@@ -20,16 +20,16 @@ public class LoginTask extends AsyncTask<User, Void, User> {
     @Override
     protected User doInBackground(User... params) {
         OkHttpClient client = new OkHttpClient();
-        final String ipv4 = "http://192.168.15.5";
+        final String host = "http://myband.ddns.net/myband/rest/";
         String urlAPI;
         MediaType json = MediaType.parse("application/json; charset=utf-8");
         Gson gson = new Gson();
         User user = params[0];
 
         if (user.getUserName() == null) {
-            urlAPI = ipv4 + ":8080/myband/rest/user/login";
+            urlAPI = host + "user/login";
         } else {
-            urlAPI = ipv4 + ":8080/myband/rest/user/createuser";
+            urlAPI = host + "user/createuser";
         }
 
         try {
