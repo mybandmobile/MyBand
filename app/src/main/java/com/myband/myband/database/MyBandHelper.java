@@ -28,7 +28,7 @@ public class MyBandHelper extends SQLiteOpenHelper {
                 UserContract.COLUMN_LOGIN + " TEXT NOT NULL, " +
                 UserContract.COLUMN_CATEGORY + " INTEGER NOT NULL, " +
                 UserContract.COLUMN_LOCATION + " TEXT, " +
-                UserContract.COLUMN_AUTOLOGIN + " INTEGER NOT NULL);";
+                UserContract.COLUMN_AUTOLOGIN + " INTEGER DEFAULT 0);";
 
         db.execSQL(createTableUser);
     }

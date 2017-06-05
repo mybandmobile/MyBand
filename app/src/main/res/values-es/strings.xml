@@ -2,6 +2,7 @@
     <string name="app_name">MyBand</string>
     <string name="name">Nombre</string>
     <string name="login">Login</string>
+    <string name="logout">Cerrar sesión</string>
     <string name="password">Contraseña</string>
     <string name="password2">Repita la contraseña</string>
     <string name="category">Categoría</string>
@@ -10,10 +11,16 @@
     <string name="typePromoter">Promotor</string>
     <string name="signin">Iniciar sesión</string>
     <string name="signup">Regístrate</string>
-
-    <string name="invalidpassword">Usuario o contraseña no coinciden!</string>
-    <string name="errorlogin">Error de conexión!</string>
-    <string name="invalidinputs">Campos no válidos!</string>
-
+    <string name="autoLogin">Sesión automática</string>
+    <string name="createAccount">Crear cuenta</string>
     <string name="title_activity_maps">Mapa</string>
+
+    <!-- Error messages -->
+    <string name="userAndPasswordDoesntMatch">Usuario y contraseña no coinciden!</string>
+    <string name="userDoesntExist">El usuario no existe!</string>
+    <string name="userAlreadyExists">El usuario ya existe!</string>
+    <string name="serverError">Error del Servidor!</string>
+    <string name="connectionError">Error de conexión!</string>
+    <string name="invalidinputs">Entradas no válidas!</string>
+    <string name="errorlogin">Error de acceso!</string>
 </resources>

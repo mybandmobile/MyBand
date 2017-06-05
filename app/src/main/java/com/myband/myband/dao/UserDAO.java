@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.myband.myband.contract.UserContract;
 import com.myband.myband.database.MyBandHelper;
+import com.myband.myband.model.Category;
 import com.myband.myband.model.User;
 
 import java.util.ArrayList;
@@ -31,10 +32,14 @@ public class UserDAO {
         this.mContext = mContext;
     }
 
-    public User insert(User user) {
+    public User insert(User user, boolean autoLogin) {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getWritableDatabase();
 
+        if (autoLogin) {
+            setAutoLoginFalse();
+            user.setAutoLogin(true);
+        }
         ContentValues values = valuesFromUser(user);
         long id = db.insert(UserContract.TABLE_NAME, null, values);
         user.setId(id);
@@ -43,10 +48,14 @@ public class UserDAO {
         return user;
     }
 
-    public int update(User user) {
+    public int update(User user, boolean autoLogin) {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getWritableDatabase();
 
+        if (autoLogin) {
+            setAutoLoginFalse();
+            user.setAutoLogin(true);
+        }
         ContentValues values = valuesFromUser(user);
         int rowsAffected = db.update(UserContract.TABLE_NAME, values, UserContract.COLUMN_ID + " = ?", new String[]{String.valueOf(user.getId())});
 
@@ -62,22 +71,22 @@ public class UserDAO {
         return rowsAffected;
     }
 
-    public User select(boolean autoLogin) {
+    public User selectAutoLogin() {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getReadableDatabase();
-        String[] auto = autoLogin ? new String[]{"1"} : new String[]{"0"};
 
         String sql = "SELECT * FROM " +
                 UserContract.TABLE_NAME +
                 " WHERE " +
                 UserContract.AUTOLOGIN +
-                " = ?;";
+                " = 1;";
 
-        Cursor cursor = db.rawQuery(sql, auto);
+        Cursor cursor = db.rawQuery(sql, null);
 
         User user = null;
         if (cursor.moveToNext()) {
             getColumnIndex(cursor);
+            Category category = new Category();
             user = new User();
             user.setId(cursor.getLong(indexID));
             user.setUserName(cursor.getString(indexName));
@@ -85,12 +94,37 @@ public class UserDAO {
             user.setPassword(cursor.getString(indexPassword));
             user.setLocation(cursor.getString(indexLocation));
             user.setAutoLogin((cursor.getInt(indexAutologin)) == 1);
-            user.getCategory().setId(cursor.getLong(indexCategory));
+
+            category.setId(cursor.getLong(indexCategory));
+            user.setCategory(category);
         }
 
         cursor.close();
         db.close();
         return user;
+    }
+
+    public int count(User user) {
+        MyBandHelper helper = new MyBandHelper(mContext);
+        SQLiteDatabase db = helper.getReadableDatabase();
+        String[] id = new String[]{String.valueOf(user.getId())};
+
+        String sql = "SELECT COUNT(*) FROM " +
+                UserContract.TABLE_NAME +
+                " WHERE " +
+                UserContract.ID +
+                " = ?;";
+
+        Cursor cursor = db.rawQuery(sql, id);
+
+        int count = 0;
+        if (cursor.moveToNext()) {
+            count = cursor.getInt(0);
+        }
+
+        cursor.close();
+        db.close();
+        return count;
     }
 
     public List<User> list() {
@@ -103,6 +137,20 @@ public class UserDAO {
         cursor.close();
         db.close();
         return list;
+    }
+
+    public void setAutoLoginFalse() {
+        MyBandHelper helper = new MyBandHelper(mContext);
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String sql = "UPDATE " +
+                UserContract.TABLE_NAME +
+                " SET " +
+                UserContract.COLUMN_AUTOLOGIN +
+                " = 0;";
+        db.execSQL(sql);
+
+        db.close();
     }
 
     private void getColumnIndex(Cursor cursor) {
@@ -118,16 +166,20 @@ public class UserDAO {
     private List<User> valuesFromCursor(Cursor cursor) {
         List<User> list = new ArrayList<>();
         User user;
+        Category category;
         getColumnIndex(cursor);
         while (cursor.moveToNext()) {
             user = new User();
+            category = new Category();
             user.setId(cursor.getLong(indexID));
             user.setUserName(cursor.getString(indexName));
             user.setLogin(cursor.getString(indexLogin));
             user.setPassword(cursor.getString(indexPassword));
             user.setLocation(cursor.getString(indexLocation));
             user.setAutoLogin((cursor.getInt(indexAutologin)) == 1);
-            user.getCategory().setId(cursor.getLong(indexCategory));
+
+            category.setId(cursor.getLong(indexCategory));
+            user.setCategory(category);
             list.add(user);
         }
         return list;

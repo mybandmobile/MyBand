@@ -19,7 +19,7 @@ public class CheckoutLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         UserDAO dao = new UserDAO(this);
-        User user = dao.select(true);
+        User user = dao.selectAutoLogin();
         Intent it = null;
 
         if (user == null) {
@@ -33,7 +33,7 @@ public class CheckoutLoginActivity extends AppCompatActivity {
                 if (user == null) {
                     it = new Intent(this, LoginActivity.class);
                 } else {
-                    dao.update(user);
+                    dao.update(user, true);
                     it = new Intent(this, MainActivity.class);
                     it.putExtra("user", Parcels.wrap(user));
                 }

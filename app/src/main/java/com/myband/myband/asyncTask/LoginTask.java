@@ -20,7 +20,8 @@ public class LoginTask extends AsyncTask<User, Void, User> {
     @Override
     protected User doInBackground(User... params) {
         OkHttpClient client = new OkHttpClient();
-        final String host = "http://myband.ddns.net/myband/rest/";
+        //final String host = "http://myband.ddns.net/myband/rest/";
+        final String host = "http://192.168.15.6:8080/myband/rest/";
         String urlAPI;
         MediaType json = MediaType.parse("application/json; charset=utf-8");
         Gson gson = new Gson();

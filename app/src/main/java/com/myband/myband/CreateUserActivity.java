@@ -41,12 +41,15 @@ public class CreateUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
+        setTitle(getResources().getString(R.string.createAccount));
         ButterKnife.bind(this);
+
+        mEdtLogin.setText(getIntent().getStringExtra("login"));
+        mEdtPassword1.setText(getIntent().getStringExtra("password"));
     }
 
     @OnClick(R.id.btnSignUp)
     void onItemClicked(View view) {
-        Intent it;
         User user;
         UserDAO dao;
         boolean error = false;
@@ -74,30 +77,43 @@ public class CreateUserActivity extends AppCompatActivity {
                 try {
                     user = new LoginTask().execute(user).get();
                     if (user == null) {
-                        Toast.makeText(this, getResources().getString(R.string.errorlogin), Toast.LENGTH_LONG).show();
+                        messageError(R.string.connectionError);
                     } else {
-                        if (user.getStatusCode() == 1) {
-                            dao.insert(user);
-                            it = new Intent(this, MainActivity.class);
-                            it.putExtra("user", Parcels.wrap(user));
-                            startActivity(it);
-                            finish();
-                        } else {
-                            // tratar esse erro!
-                            Toast.makeText(this, getResources().getString(R.string.invalidinputs), Toast.LENGTH_LONG).show();
+                        switch (user.getStatusCode()) {
+                            case User.loginOk:
+                                loginOk(user, dao);
+                                break;
+                            case User.userAlreadyExists:
+                                messageError(R.string.userAlreadyExists);
+                                break;
+                            case User.serverError:
+                                messageError(R.string.serverError);
+                                break;
                         }
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, getResources().getString(R.string.errorlogin), Toast.LENGTH_LONG).show();
+                    messageError(R.string.errorlogin);
                 } catch (ExecutionException e) {
                     e.printStackTrace();
-                    Toast.makeText(this, getResources().getString(R.string.errorlogin), Toast.LENGTH_LONG).show();
+                    messageError(R.string.errorlogin);
                 }
             } else {
-                Toast.makeText(this, getResources().getString(R.string.invalidinputs), Toast.LENGTH_LONG).show();
+                messageError(R.string.invalidinputs);
             }
         }
+    }
+
+    private void loginOk(User user, UserDAO dao) {
+        dao.insert(user, true);
+        Intent it = new Intent(this, MainActivity.class);
+        it.putExtra("user", Parcels.wrap(user));
+        startActivity(it);
+        finish();
+    }
+
+    private void messageError(int codeMessage) {
+        Toast.makeText(this, getResources().getString(codeMessage), Toast.LENGTH_LONG).show();
     }
 
     public void onRadioButtonClicked(View view) {

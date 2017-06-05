@@ -20,6 +20,12 @@ public class User {
     private int statusCode;
     private boolean autoLogin;
 
+    public static final int loginOk = 1;
+    public static final int userAndPasswordDoesntMatch = 2;
+    public static final int userDoesntExist = 3;
+    public static final int userAlreadyExists = 4;
+    public static final int serverError = 5;
+
     public User() {
     }
 

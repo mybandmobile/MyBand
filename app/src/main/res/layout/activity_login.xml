@@ -29,6 +29,12 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword" />
 
+    <CheckBox
+        android:id="@+id/chbAutoLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/autoLogin" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
