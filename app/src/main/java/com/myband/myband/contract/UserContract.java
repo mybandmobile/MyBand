@@ -12,7 +12,8 @@ public interface UserContract {
     String COLUMN_NAME = TABLE_NAME + "_userName";
     String COLUMN_LOGIN = TABLE_NAME + "_login";
     String COLUMN_PASSWORD = TABLE_NAME + "_password";
-    String COLUMN_LOCATION = TABLE_NAME + "_location";
+    String COLUMN_LATITUDE = TABLE_NAME + "_latitude";
+    String COLUMN_LONGITUDE = TABLE_NAME + "_longitude";
     String COLUMN_AUTOLOGIN = TABLE_NAME + "_autoLogin";
 
     String ID = TABLE_NAME + "." + COLUMN_ID;
@@ -20,6 +21,7 @@ public interface UserContract {
     String NAME = TABLE_NAME + "." + COLUMN_NAME;
     String LOGIN = TABLE_NAME + "." + COLUMN_LOGIN;
     String PASSWORD = TABLE_NAME + "." + COLUMN_PASSWORD;
-    String LOCATION = TABLE_NAME + "." + COLUMN_LOCATION;
+    String LATITUDE = TABLE_NAME + "." + COLUMN_LATITUDE;
+    String LONGITUDE = TABLE_NAME + "." + COLUMN_LONGITUDE;
     String AUTOLOGIN = TABLE_NAME + "." + COLUMN_AUTOLOGIN;
 }

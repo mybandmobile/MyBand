@@ -15,13 +15,13 @@ import okhttp3.Response;
  * Created by ranie on 30 de mai.
  */
 
-public class LoginTask extends AsyncTask<User, Void, User> {
+public class CreateUserTask extends AsyncTask<User, Void, User> {
 
     @Override
     protected User doInBackground(User... params) {
         OkHttpClient client = new OkHttpClient();
-        //final String host = "http://myband.ddns.net/myband/rest/user/login";
-        final String host = "http://192.168.15.6:8080/myband/rest/user/login";
+        //final String host = "http://myband.ddns.net/myband/rest/user/createuser";
+        final String host = "http://192.168.15.6:8080/myband/rest/user/createuser";
         MediaType json = MediaType.parse("application/json; charset=utf-8");
         Gson gson = new Gson();
         User user = params[0];

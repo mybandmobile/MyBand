@@ -16,7 +16,8 @@ public class User {
     private String userName;
     private String login;
     private String password;
-    private String location;
+    private double latitude;
+    private double longitude;
     private int statusCode;
     private boolean autoLogin;
 
@@ -69,14 +70,6 @@ public class User {
         this.password = password;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public boolean isAutoLogin() {
         return autoLogin;
     }
@@ -91,5 +84,21 @@ public class User {
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

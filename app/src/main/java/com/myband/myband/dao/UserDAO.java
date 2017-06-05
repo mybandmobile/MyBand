@@ -24,7 +24,8 @@ public class UserDAO {
     private int indexName;
     private int indexLogin;
     private int indexPassword;
-    private int indexLocation;
+    private int indexLatitude;
+    private int indexLongitude;
     private int indexAutologin;
     private int indexCategory;
 
@@ -92,7 +93,8 @@ public class UserDAO {
             user.setUserName(cursor.getString(indexName));
             user.setLogin(cursor.getString(indexLogin));
             user.setPassword(cursor.getString(indexPassword));
-            user.setLocation(cursor.getString(indexLocation));
+            user.setLatitude(cursor.getDouble(indexLatitude));
+            user.setLongitude(cursor.getDouble(indexLongitude));
             user.setAutoLogin((cursor.getInt(indexAutologin)) == 1);
 
             category.setId(cursor.getLong(indexCategory));
@@ -158,7 +160,8 @@ public class UserDAO {
         indexName = cursor.getColumnIndex(UserContract.COLUMN_NAME);
         indexLogin = cursor.getColumnIndex(UserContract.COLUMN_LOGIN);
         indexPassword = cursor.getColumnIndex(UserContract.COLUMN_PASSWORD);
-        indexLocation = cursor.getColumnIndex(UserContract.COLUMN_LOCATION);
+        indexLatitude = cursor.getColumnIndex(UserContract.COLUMN_LATITUDE);
+        indexLongitude = cursor.getColumnIndex(UserContract.COLUMN_LONGITUDE);
         indexAutologin = cursor.getColumnIndex(UserContract.COLUMN_AUTOLOGIN);
         indexCategory = cursor.getColumnIndex(UserContract.COLUMN_CATEGORY);
     }
@@ -175,7 +178,8 @@ public class UserDAO {
             user.setUserName(cursor.getString(indexName));
             user.setLogin(cursor.getString(indexLogin));
             user.setPassword(cursor.getString(indexPassword));
-            user.setLocation(cursor.getString(indexLocation));
+            user.setLatitude(cursor.getDouble(indexLatitude));
+            user.setLongitude(cursor.getDouble(indexLongitude));
             user.setAutoLogin((cursor.getInt(indexAutologin)) == 1);
 
             category.setId(cursor.getLong(indexCategory));
@@ -191,7 +195,8 @@ public class UserDAO {
         values.put(UserContract.COLUMN_NAME, user.getUserName());
         values.put(UserContract.COLUMN_LOGIN, user.getLogin());
         values.put(UserContract.COLUMN_PASSWORD, user.getPassword());
-        values.put(UserContract.COLUMN_LOCATION, user.getLocation());
+        values.put(UserContract.COLUMN_LATITUDE, user.getLatitude());
+        values.put(UserContract.COLUMN_LONGITUDE, user.getLongitude());
         values.put(UserContract.COLUMN_AUTOLOGIN, (user.isAutoLogin()) ? 1 : 0);
         values.put(UserContract.COLUMN_CATEGORY, user.getCategory().getId());
         return values;

@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.btnSignUp, R.id.btnMaps})
+    @OnClick(R.id.btnSignUp)
     void onItemClicked(View view) {
         Intent it;
 
@@ -99,10 +99,6 @@ public class LoginActivity extends AppCompatActivity {
                 it = new Intent(this, CreateUserActivity.class);
                 it.putExtra("login", mEdtLogin.getText().toString());
                 it.putExtra("password", mEdtPassword.getText().toString());
-                startActivity(it);
-                break;
-            case R.id.btnMaps:
-                it = new Intent(this, MapsActivity.class);
                 startActivity(it);
                 break;
         }

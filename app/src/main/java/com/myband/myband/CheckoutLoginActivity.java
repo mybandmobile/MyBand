@@ -30,7 +30,7 @@ public class CheckoutLoginActivity extends AppCompatActivity {
             //verifica internet
             try {
                 user = new LoginTask().execute(user).get();
-                if (user == null) {
+                if (user == null || user.getStatusCode() != 1) {
                     it = new Intent(this, LoginActivity.class);
                 } else {
                     dao.update(user, true);

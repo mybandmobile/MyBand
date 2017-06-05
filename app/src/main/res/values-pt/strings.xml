@@ -13,6 +13,9 @@
     <string name="signup">Nova conta</string>
     <string name="autoLogin">Login automático</string>
     <string name="createAccount">Criar conta</string>
+    <string name="profile">Perfil</string>
+    <string name="events">Eventos</string>
+    <string name="location">Localização</string>
     <string name="title_activity_maps">Mapa</string>
 
     <!-- Error messages -->

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.myband.myband.asyncTask.LoginTask;
+import com.myband.myband.asyncTask.CreateUserTask;
 import com.myband.myband.dao.UserDAO;
 import com.myband.myband.model.Category;
 import com.myband.myband.model.User;
@@ -75,7 +75,7 @@ public class CreateUserActivity extends AppCompatActivity {
                 user.setCategory(category);
                 user.setAutoLogin(true);
                 try {
-                    user = new LoginTask().execute(user).get();
+                    user = new CreateUserTask().execute(user).get();
                     if (user == null) {
                         messageError(R.string.connectionError);
                     } else {
