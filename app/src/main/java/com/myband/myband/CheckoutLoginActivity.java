@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.myband.myband.asyncTask.LoginTask;
+import com.myband.myband.asyncTask.UserTask;
 import com.myband.myband.dao.UserDAO;
 import com.myband.myband.model.User;
 
@@ -21,6 +21,7 @@ public class CheckoutLoginActivity extends AppCompatActivity {
         UserDAO dao = new UserDAO(this);
         User user = dao.selectAutoLogin();
         Intent it = null;
+        Bundle bundle;
 
         if (user == null) {
             it = new Intent(this, LoginActivity.class);
@@ -29,7 +30,10 @@ public class CheckoutLoginActivity extends AppCompatActivity {
         } else {
             //verifica internet
             try {
-                user = new LoginTask().execute(user).get();
+                bundle = new Bundle();
+                bundle.putParcelable("user", Parcels.wrap(user));
+                bundle.putInt("cod", User.loginAccount);
+                user = new UserTask().execute(bundle).get();
                 if (user == null || user.getStatusCode() != 1) {
                     it = new Intent(this, LoginActivity.class);
                 } else {

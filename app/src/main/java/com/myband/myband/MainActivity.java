@@ -8,11 +8,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.myband.myband.asyncTask.UserTask;
 import com.myband.myband.dao.UserDAO;
 import com.myband.myband.model.User;
 
 import org.parceler.Parcels;
+
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,7 +60,20 @@ public class MainActivity extends AppCompatActivity {
 
         mTxtUserName.setText(user.getUserName());
         mTxtLogin.setText(user.getLogin());
-        mTxtCategory.setText(user.getCategory().getName());
+        switch (user.getCategory().getId().intValue()) {
+            case 1:
+                mTxtCategory.setText(getResources().getString(R.string.typeArtist));
+                break;
+            case 2:
+                mTxtCategory.setText(getResources().getString(R.string.typeBand));
+                break;
+            case 3:
+                mTxtCategory.setText(getResources().getString(R.string.typePromoter));
+                break;
+            default:
+                mTxtCategory.setText(getResources().getString(R.string.typeArtist));
+                break;
+        }
     }
 
     @OnClick(R.id.btnMaps)
@@ -81,9 +98,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent it;
+        UserDAO dao;
+        Bundle bundle;
         switch (item.getItemId()) {
+
+            case R.id.action_update:
+                bundle = new Bundle();
+                bundle.putParcelable("user", Parcels.wrap(user));
+                bundle.putInt("cod", User.updateAccount);
+                try {
+                    user = new UserTask().execute(bundle).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            case R.id.action_delete:
+                bundle = new Bundle();
+                bundle.putParcelable("user", Parcels.wrap(user));
+                bundle.putInt("cod", User.deleteAccount);
+                try {
+                    user = new UserTask().execute(bundle).get();
+                    if (user != null || user.getStatusCode() == User.deleteOk) {
+                        dao = new UserDAO(this);
+                        dao.delete(user);
+                        it = new Intent(this, LoginActivity.class);
+                        startActivity(it);
+                        finish();
+                    }else{
+                        Toast.makeText(this, getResources().getString(R.string.userAndPasswordDoesntMatch), Toast.LENGTH_LONG).show();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                break;
+
             case R.id.action_logout:
-                UserDAO dao = new UserDAO(this);
+                dao = new UserDAO(this);
                 dao.setAutoLoginFalse();
                 it = new Intent(this, LoginActivity.class);
                 startActivity(it);

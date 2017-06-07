@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.myband.myband.asyncTask.CreateUserTask;
+import com.myband.myband.asyncTask.UserTask;
 import com.myband.myband.dao.UserDAO;
 import com.myband.myband.model.Category;
 import com.myband.myband.model.User;
@@ -52,6 +52,7 @@ public class CreateUserActivity extends AppCompatActivity {
     void onItemClicked(View view) {
         User user;
         UserDAO dao;
+        Bundle bundle;
         boolean error = false;
         if (view.getId() == R.id.btnSignUp) {
             if (Objects.equals(mEdtLogin.getText().toString(), "")) {
@@ -75,7 +76,10 @@ public class CreateUserActivity extends AppCompatActivity {
                 user.setCategory(category);
                 user.setAutoLogin(true);
                 try {
-                    user = new CreateUserTask().execute(user).get();
+                    bundle = new Bundle();
+                    bundle.putParcelable("user", Parcels.wrap(user));
+                    bundle.putInt("cod", User.createAccount);
+                    user = new UserTask().execute(bundle).get();
                     if (user == null) {
                         messageError(R.string.connectionError);
                     } else {

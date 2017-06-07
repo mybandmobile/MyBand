@@ -2,7 +2,6 @@
     <string name="app_name">MyBand</string>
     <string name="name">Nombre</string>
     <string name="login">Login</string>
-    <string name="logout">Cerrar sesión</string>
     <string name="password">Contraseña</string>
     <string name="password2">Repita la contraseña</string>
     <string name="category">Categoría</string>
@@ -17,6 +16,9 @@
     <string name="events">Eventos</string>
     <string name="location">Ubicación</string>
     <string name="title_activity_maps">Mapa</string>
+    <string name="update">Editar Cuenta</string>
+    <string name="delete">Eliminar Cuenta</string>
+    <string name="logout">Salir</string>
 
     <!-- Error messages -->
     <string name="userAndPasswordDoesntMatch">Usuario y contraseña no coinciden!</string>

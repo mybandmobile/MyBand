@@ -12,48 +12,32 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/name" />
-
         <EditText
             android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/name"
             android:inputType="textAutoCorrect" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login" />
 
         <EditText
             android:id="@+id/edtLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/login"
             android:inputType="text" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/password" />
 
         <EditText
             android:id="@+id/edtPassword1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/password"
             android:inputType="textPassword" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/password2" />
 
         <EditText
             android:id="@+id/edtPassword2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/password2"
             android:inputType="textPassword" />
 
         <TextView

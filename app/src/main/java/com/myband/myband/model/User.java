@@ -26,6 +26,14 @@ public class User {
     public static final int userDoesntExist = 3;
     public static final int userAlreadyExists = 4;
     public static final int serverError = 5;
+    public static final int updateOk = 6;
+    public static final int deleteOk = 7;
+
+    // Codigos para AsyncTask
+    public static final int loginAccount = 1;
+    public static final int createAccount = 2;
+    public static final int updateAccount = 3;
+    public static final int deleteAccount = 4;
 
     public User() {
     }
