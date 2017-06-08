@@ -24,7 +24,7 @@ public class UserTask extends AsyncTask<Bundle, Void, User> {
     protected User doInBackground(Bundle... params) {
         OkHttpClient client = new OkHttpClient();
         String host = "http://myband.ddns.net/rest/user";
-        //final String host = "http://192.168.15.6:8080/myband/rest/user";
+        //String host = "http://192.168.15.7:8080/myband/rest/user";
         MediaType json = MediaType.parse("application/json; charset=utf-8");
         Gson gson = new Gson();
 
@@ -45,8 +45,6 @@ public class UserTask extends AsyncTask<Bundle, Void, User> {
                 host += "/deleteuser";
                 break;
         }
-
-
         try {
             String jsonString = gson.toJson(user, User.class);
 

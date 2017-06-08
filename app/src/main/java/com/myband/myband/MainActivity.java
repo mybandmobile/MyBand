@@ -121,14 +121,14 @@ public class MainActivity extends AppCompatActivity {
                 bundle.putInt("cod", User.deleteAccount);
                 try {
                     user = new UserTask().execute(bundle).get();
-                    if (user != null || user.getStatusCode() == User.deleteOk) {
+                    if (user != null && user.getStatusCode() == User.deleteOk) {
                         dao = new UserDAO(this);
                         dao.delete(user);
                         it = new Intent(this, LoginActivity.class);
                         startActivity(it);
                         finish();
-                    }else{
-                        Toast.makeText(this, getResources().getString(R.string.userAndPasswordDoesntMatch), Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this, getResources().getString(R.string.connectionError), Toast.LENGTH_LONG).show();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
