@@ -2,13 +2,12 @@ package com.myband.myband;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TabHost;
-import android.widget.TabWidget;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.myband.myband.asyncTask.UserTask;
@@ -19,23 +18,8 @@ import org.parceler.Parcels;
 
 import java.util.concurrent.ExecutionException;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
-
-    @BindView(R.id.txtUserName)
-    TextView mTxtUserName;
-
-    @BindView(R.id.txtLogin)
-    TextView mTxtLogin;
-
-    @BindView(R.id.txtCategory)
-    TextView mTxtCategory;
-
-    @BindView(R.id.tab2)
-    TabWidget mTab2;
 
     private User user;
 
@@ -43,54 +27,39 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        TabHost host = (TabHost) findViewById(R.id.tabHost);
-        host.setup();
-
-        //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("Tab1");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator(getResources().getString(R.string.profile));
-        host.addTab(spec);
-
-        //Tab 2
-        spec = host.newTabSpec("Tab2");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator(getResources().getString(R.string.events));
-        host.addTab(spec);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.profile)));
+        tabLayout.addTab(tabLayout.newTab().setText(getResources().getString(R.string.events)));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         user = Parcels.unwrap(getIntent().getParcelableExtra("user"));
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("user", Parcels.wrap(user));
 
-        mTxtUserName.setText(user.getUserName());
-        mTxtLogin.setText(user.getLogin());
-        switch (user.getCategory().getId().intValue()) {
-            case 1:
-                mTxtCategory.setText(getResources().getString(R.string.typeArtist));
-                break;
-            case 2:
-                mTxtCategory.setText(getResources().getString(R.string.typeBand));
-                break;
-            case 3:
-                mTxtCategory.setText(getResources().getString(R.string.typePromoter));
-                break;
-            default:
-                mTxtCategory.setText(getResources().getString(R.string.typeArtist));
-                break;
-        }
-    }
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), tabLayout.getTabCount(), bundle);
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
 
-    @OnClick(R.id.btnMaps)
-    void onItemClicked(View view) {
-        Intent it;
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-        switch (view.getId()) {
-            case R.id.btnMaps:
-                it = new Intent(this, MapsActivity.class);
-                it.putExtra("user", Parcels.wrap(user));
-                startActivity(it);
-                break;
-        }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     @Override
@@ -148,9 +117,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
                 finish();
                 break;
+            case R.id.action_maps:
+                it = new Intent(this, MapsActivity.class);
+                it.putExtra("user", Parcels.wrap(user));
+                startActivity(it);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
