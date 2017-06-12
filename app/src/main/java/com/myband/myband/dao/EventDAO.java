@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.myband.myband.contract.EventContract;
 import com.myband.myband.database.MyBandHelper;
 import com.myband.myband.model.Event;
 import com.myband.myband.model.SubGenre;
 import com.myband.myband.model.User;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class EventDAO {
     private int indexSubGenre;
     private int indexInitialDate;
     private int indexFinalDate;
+
 
     public EventDAO(Context mContext) {
         this.mContext = mContext;
@@ -64,7 +67,6 @@ public class EventDAO {
         return rowsAffected;
     }
 
-
     public List<Event> list() throws ParseException {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getReadableDatabase();
@@ -77,7 +79,6 @@ public class EventDAO {
         return list;
     }
 
-
     private void getColumnIndex(Cursor cursor) {
         indexId = cursor.getColumnIndex(EventContract.COLUMN_ID);
         indexRequester = cursor.getColumnIndex(EventContract.COLUMN_REQUESTER);
@@ -89,7 +90,7 @@ public class EventDAO {
     }
 
     private List<Event> valuesFromCursor(Cursor cursor) throws ParseException {
-        List<Event> list =        new ArrayList<>();
+        List<Event> list = new ArrayList<>();
         Event event;
         User requester;
         User provider;
@@ -100,10 +101,10 @@ public class EventDAO {
         java.util.Date dataEnd;
 
         while (cursor.moveToNext()) {
-            event =     new Event();
+            event = new Event();
             requester = new User();
-            provider =  new User();
-            subGenre =  new SubGenre();
+            provider = new User();
+            subGenre = new SubGenre();
             event.setId(cursor.getLong(indexId));
 
             requester.setId(cursor.getLong(indexRequester));
@@ -127,7 +128,7 @@ public class EventDAO {
     }
 
     private ContentValues valuesFromEvent(Event event) {
-        ContentValues values =   new ContentValues();
+        ContentValues values = new ContentValues();
         values.put(EventContract.COLUMN_ID, event.getId());
         values.put(EventContract.COLUMN_REQUESTER, String.valueOf(event.getRequester()));
         values.put(EventContract.COLUMN_PROVIDER, String.valueOf(event.getProvider()));
