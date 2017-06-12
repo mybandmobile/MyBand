@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
+import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.txtCategory)
     TextView mTxtCategory;
+
+    @BindView(R.id.tab2)
+    TabWidget mTab2;
 
     private User user;
 
@@ -147,4 +151,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

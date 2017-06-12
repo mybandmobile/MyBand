@@ -37,8 +37,7 @@ public class EventDAO {
         SQLiteDatabase db = helper.getWritableDatabase();
 
         ContentValues values = valuesFromEvent(event);
-        long id = db.insert(EventContract.TABLE_NAME, null, values);
-        event.setId(id);
+        db.insert(EventContract.TABLE_NAME, null, values);
 
         db.close();
         return event;

@@ -41,6 +41,7 @@ public class EventoTask extends AsyncTask<Bundle,Void,Event> {
                 break;
         }
         try {
+
             String jsonString = gson.toJson(event, Event.class);
 
             RequestBody body = RequestBody.create(json, jsonString);

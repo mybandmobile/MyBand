@@ -3,6 +3,7 @@ package com.myband.myband.model;
 import org.parceler.Parcel;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.parceler.Parcel.Serialization.BEAN;
 
@@ -19,6 +20,8 @@ public class Event {
     private SubGenre subGenre;
     private Date initialDate;
     private Date finalDate;
+    private List<Event> eventos;
+
 
     // Codigos para AsyncTask
     public static final int createEvent = 1;
@@ -74,5 +77,13 @@ public class Event {
 
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
+    }
+
+    public List<Event> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Event> eventos) {
+        this.eventos = eventos;
     }
 }
