@@ -67,7 +67,8 @@ public class UserDAO {
     public int delete(User user) {
         MyBandHelper helper = new MyBandHelper(mContext);
         SQLiteDatabase db = helper.getWritableDatabase();
-        int rowsAffected = db.delete(UserContract.TABLE_NAME, UserContract.COLUMN_ID + " = ?", new String[]{String.valueOf(user.getId())});
+        int rowsAffected = db.delete(UserContract.TABLE_NAME, UserContract.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(user.getId())});
         db.close();
         return rowsAffected;
     }

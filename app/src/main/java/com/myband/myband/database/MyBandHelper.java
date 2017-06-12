@@ -4,7 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.myband.myband.contract.EventContract;
 import com.myband.myband.contract.UserContract;
+import com.myband.myband.model.Event;
 
 /**
  * Created by Ranieri Aguiar on 11 de mai.
@@ -32,6 +34,16 @@ public class MyBandHelper extends SQLiteOpenHelper {
                 UserContract.COLUMN_AUTOLOGIN + " INTEGER DEFAULT 0);";
 
         db.execSQL(createTableUser);
+
+        String createTableEvent = "CREATE TABLE " + EventContract.TABLE_NAME + " (" +
+                EventContract.COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                EventContract.COLUMN_REQUESTER + " TEXT NOT NULL, " +
+                EventContract.COLUMN_PROVIDER + " TEXT NOT NULL, " +
+                EventContract.SUBGENRE + " TEXT NOT NULL, " +
+                EventContract.INITIALDATE + " INTEGER NOT NULL, " +
+                EventContract.FINALDATE + " REAL NOT NULL);";
+
+        db.execSQL(createTableEvent);
     }
 
     @Override

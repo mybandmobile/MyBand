@@ -20,6 +20,11 @@ public class Event {
     private Date initialDate;
     private Date finalDate;
 
+    // Codigos para AsyncTask
+    public static final int createEvent = 1;
+    public static final int updateEvent = 2;
+    public static final int deleteEvent = 3;
+
     public Event() {
     }
 
